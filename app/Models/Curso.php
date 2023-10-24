@@ -7,7 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Curso extends Model
 {
-    use HasFactory;
-
-    protected $table = "users" //cambiar a otra tabla ¡¡IMPORTANTE!!
+    use HasFactory; //cambiar a otra tabla ¡¡IMPORTANTE!!
 }
