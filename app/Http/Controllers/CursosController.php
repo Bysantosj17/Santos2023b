@@ -10,7 +10,7 @@ class CursosController extends Controller
 {
     public function index(){
 
-        $cursos = Curso::all();
+        $cursos = Curso::paginate(10);
 
         return view('cursos.index', compact('cursos'));
     }
@@ -19,7 +19,10 @@ class CursosController extends Controller
         return view('cursos.create');
     }
 
-    public function show($curso){
+    public function show($id){
+
+        $curso = Curso::find($id);
+
         return view('cursos.show', compact('curso'));
     }
 }
