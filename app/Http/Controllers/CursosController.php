@@ -8,9 +8,9 @@ use Illuminate\Http\Request;
 
 class CursosController extends Controller
 {
-    public function index(){
+    public function index(){ 
 
-        $cursos = Curso::paginate(10);
+        $cursos = Curso::orderBy('id', 'desc')->paginate(10);
 
         return view('cursos.index', compact('cursos'));
     }
@@ -19,10 +19,24 @@ class CursosController extends Controller
         return view('cursos.create');
     }
 
-    public function show($id){
+    public function store( Request $request){
+        $curso = new Curso();
 
-        $curso = Curso::find($id);
+        $curso->name =  $request->name;
+        $curso->descripcion =  $request->descripcion;
+        $curso->categoria =  $request->categoria;
+
+        $curso->save();
+
+        return redirect()->route('cursos.show', $curso);
+    }
+
+    public function show( Curso $curso){        
 
         return view('cursos.show', compact('curso'));
+    }
+
+    public function edit(Curso $curso){
+        return view('cursos.edit', compact('curso'));
     }
 }
